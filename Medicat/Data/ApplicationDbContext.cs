@@ -22,5 +22,11 @@ namespace Medicat.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+        public DbSet<Medicat.Models.Patient> Patient { get; set; }
+
+        public DbSet<Medicat.Models.Medicine> Medicine { get; set; }
+
+        public DbSet<Medicat.Models.Administration> Administration { get; set; }
     }
 }

@@ -5,10 +5,18 @@ using System.Threading.Tasks;
 
 namespace Medicat.Models
 {
-    public class Patient
+    public class Medicine
     {
       public int Id { get; set; }
       public string Name { get; set; }
-      public Species Species { get; set; }
+      public Unit Unit { get; set; } 
+
     }
+
+   public enum Unit
+   {
+      Millilitre,
+      Gram,
+      Tablet,
+   }
 }
