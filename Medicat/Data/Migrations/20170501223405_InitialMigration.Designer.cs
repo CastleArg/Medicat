@@ -9,9 +9,10 @@ using Medicat.Models;
 namespace Medicat.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170501223405_InitialMigration")]
+    partial class InitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
@@ -24,15 +25,19 @@ namespace Medicat.Data.Migrations
 
                     b.Property<DateTime>("AdministrationDate");
 
-                    b.Property<int>("ApplicationUserId");
+                    b.Property<int?>("MedicineId");
 
-                    b.Property<decimal>("Dose");
+                    b.Property<int?>("PatientId");
 
-                    b.Property<int>("MedicineId");
-
-                    b.Property<int>("PatientId");
+                    b.Property<string>("RecordedById");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MedicineId");
+
+                    b.HasIndex("PatientId");
+
+                    b.HasIndex("RecordedById");
 
                     b.ToTable("Administration");
                 });
@@ -220,6 +225,21 @@ namespace Medicat.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Medicat.Models.Administration", b =>
+                {
+                    b.HasOne("Medicat.Models.Medicine", "Medicine")
+                        .WithMany()
+                        .HasForeignKey("MedicineId");
+
+                    b.HasOne("Medicat.Models.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId");
+
+                    b.HasOne("Medicat.Models.ApplicationUser", "RecordedBy")
+                        .WithMany()
+                        .HasForeignKey("RecordedById");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

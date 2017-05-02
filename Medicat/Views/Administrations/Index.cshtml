@@ -1,7 +1,11 @@
 @model IEnumerable<Medicat.Models.Administration>
-
 @{
     ViewData["Title"] = "Index";
+}
+
+@{
+   var medicines = (SelectList)ViewData["MedicineId"];
+   var patients = (SelectList)ViewData["PatientId"];
 }
 
 <h2>Index</h2>
@@ -13,7 +17,19 @@
     <thead>
         <tr>
                 <th>
+                    @Html.DisplayNameFor(model => model.PatientId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MedicineId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Dose)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.AdministrationDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ApplicationUserId)
                 </th>
             <th></th>
         </tr>
@@ -22,7 +38,20 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+               @patients.SingleOrDefault(x=>x.Value.id == item.Id)?.Name
+               
+            </td>
+            <td>
+                @*@medicines.Items.SingleOrDefault(x => x.Id == item.Id)?.Name*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dose)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.AdministrationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicationUserId)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

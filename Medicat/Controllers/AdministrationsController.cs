@@ -22,6 +22,7 @@ namespace Medicat.Controllers
         // GET: Administrations
         public async Task<IActionResult> Index()
         {
+         PopulateDropdowns();
             return View(await _context.Administration.ToListAsync());
         }
 
@@ -46,16 +47,24 @@ namespace Medicat.Controllers
         // GET: Administrations/Create
         public IActionResult Create()
         {
+         PopulateDropdowns();
             return View();
         }
+
+      private void PopulateDropdowns()
+      {
+         ViewData["MedicineId"] =new SelectList (_context.Medicine.ToList(),"Id","Name");
+         ViewData["PatientId"] = new SelectList(_context.Patient.ToList(), "Id", "Name");
+      }
 
         // POST: Administrations/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,AdministrationDate")] Administration administration)
+        public async Task<IActionResult> Create([Bind("PatientId,MedicineId,Dose,AdministrationDate,ApplicationUserId")] Administration administration)
         {
+         var x = Request;
             if (ModelState.IsValid)
             {
                 _context.Add(administration);
@@ -68,6 +77,7 @@ namespace Medicat.Controllers
         // GET: Administrations/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+         PopulateDropdowns();
             if (id == null)
             {
                 return NotFound();
@@ -86,7 +96,7 @@ namespace Medicat.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,AdministrationDate")] Administration administration)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,PatientId,MedicineId,Dose,AdministrationDate,ApplicationUserId")] Administration administration)
         {
             if (id != administration.Id)
             {

@@ -21,7 +21,8 @@
         <div class="form-group">
             <label asp-for="Species" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <select asp-for="Species" class="form-control"></select>
+               <select asp-for="Species" class="form-control" asp-items="Html.GetEnumSelectList<Species>()"></select>
+                @*<select asp-for="Species" class="form-control"></select>*@
                 <span asp-validation-for="Species" class="text-danger"></span>
             </div>
         </div>
