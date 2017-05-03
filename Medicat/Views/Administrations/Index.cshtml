@@ -35,17 +35,18 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
         <tr>
             <td>
-               @patients.SingleOrDefault(x=>x.Id == item.PatientId)?.Name
+               @patients.SingleOrDefault(x => x.Id == item.PatientId)?.Name
                
             </td>
             <td>
-                @medicines.SingleOrDefault(x =>x.Id == item.MedicineId)?.Name
+                @medicines.SingleOrDefault(x => x.Id == item.MedicineId)?.Name
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Dose)
+                @Html.DisplayFor(modelItem => item.Dose) @medicines.SingleOrDefault(x => x.Id == item.MedicineId)?.Unit@if(item.Dose > 1){<span>s</span>}               
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AdministrationDate)
