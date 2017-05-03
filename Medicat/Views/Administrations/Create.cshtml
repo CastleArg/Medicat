@@ -27,14 +27,14 @@
         <div class="form-group">
             <label asp-for="Dose" class="col-md-2 control-label"></label>
            
-                <input asp-for="Dose" class="form-control" />
+                <input type="number" asp-for="Dose" class="form-control" />
                 <span asp-validation-for="Dose" class="text-danger"></span>
             
         </div>
         <div class="form-group">
             <label asp-for="AdministrationDate" class="col-md-2 control-label"></label>
            
-           <input  asp-for="AdministrationDate" class="form-control" />
+           <input  asp-for="AdministrationDate" value=@DateTime.UtcNow.Date class="form-control" />
              <span asp-validation-for="AdministrationDate" class="text-danger"></span>
            
         </div>

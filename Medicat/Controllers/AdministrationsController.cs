@@ -48,7 +48,8 @@ namespace Medicat.Controllers
         public IActionResult Create()
         {
          PopulateDropdowns();
-            return View();
+         
+         return View();
         }
 
       private void PopulateDropdowns()
@@ -70,6 +71,7 @@ namespace Medicat.Controllers
          var x = Request;
             if (ModelState.IsValid)
             {
+          //  administration.ApplicationUserId = User.Identity.Name ;
                 _context.Add(administration);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -136,7 +138,8 @@ namespace Medicat.Controllers
             {
                 return NotFound();
             }
-
+         PopulateDropdowns();
+        
             var administration = await _context.Administration
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (administration == null)
