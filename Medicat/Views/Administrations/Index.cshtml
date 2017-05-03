@@ -4,8 +4,8 @@
 }
 
 @{
-   var medicines = (SelectList)ViewData["MedicineId"];
-   var patients = (SelectList)ViewData["PatientId"];
+   var medicines = (IEnumerable<Medicine>)ViewData["Medicines"];
+   var patients = (IEnumerable<Patient>)ViewData["Patients"];
 }
 
 <h2>Index</h2>
@@ -38,11 +38,11 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-               @patients.SingleOrDefault(x=>x.Value.id == item.Id)?.Name
+               @patients.SingleOrDefault(x=>x.Id == item.PatientId)?.Name
                
             </td>
             <td>
-                @*@medicines.Items.SingleOrDefault(x => x.Id == item.Id)?.Name*@
+                @medicines.SingleOrDefault(x =>x.Id == item.MedicineId)?.Name
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Dose)

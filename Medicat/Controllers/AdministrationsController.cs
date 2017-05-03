@@ -53,8 +53,11 @@ namespace Medicat.Controllers
 
       private void PopulateDropdowns()
       {
-         ViewData["MedicineId"] =new SelectList (_context.Medicine.ToList(),"Id","Name");
-         ViewData["PatientId"] = new SelectList(_context.Patient.ToList(), "Id", "Name");
+         ViewData["Medicines"] =_context.Medicine.ToList();
+         ViewData["Patients"] = _context.Patient.ToList();
+
+         ViewData["PatientsList"] = new SelectList(_context.Patient.ToList(), "Id", "Name");
+         ViewData["MedicinesList"] = new SelectList(_context.Medicine.ToList(), "Id", "Name");
       }
 
         // POST: Administrations/Create
@@ -148,7 +151,8 @@ namespace Medicat.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
-        {
+      {
+         PopulateDropdowns();
             var administration = await _context.Administration.SingleOrDefaultAsync(m => m.Id == id);
             _context.Administration.Remove(administration);
             await _context.SaveChangesAsync();

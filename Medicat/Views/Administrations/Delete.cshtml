@@ -3,6 +3,10 @@
 @{
     ViewData["Title"] = "Delete";
 }
+@{
+   var medicines = (IEnumerable<Medicine>)ViewData["Medicines"];
+   var patients = (IEnumerable<Patient>)ViewData["Patients"];
+}
 
 <h2>Delete</h2>
 
@@ -16,13 +20,13 @@
             @Html.DisplayNameFor(model => model.PatientId)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.PatientId)
+           @patients.SingleOrDefault(x => x.Id == Model.PatientId)?.Name
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.MedicineId)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.MedicineId)
+           @patients.SingleOrDefault(x => x.Id == Model.MedicineId)?.Name
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Dose)
