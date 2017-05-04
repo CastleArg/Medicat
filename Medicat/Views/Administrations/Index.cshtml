@@ -1,6 +1,6 @@
 @model IEnumerable<Medicat.Models.Administration>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Past Medications";
 }
 
 @{
@@ -8,7 +8,7 @@
    var patients = (IEnumerable<Patient>)ViewData["Patients"];
 }
 
-<h2>Index</h2>
+<h2>Past Medications</h2>
 
 <p>
     <a asp-action="Create">Create New</a>

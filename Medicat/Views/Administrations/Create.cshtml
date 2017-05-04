@@ -1,15 +1,14 @@
 @model Medicat.Models.Administration
 
 @{
-   ViewData["Title"] = "Create";
+   ViewData["Title"] = "Record Medication";
    var medicines = (IEnumerable<Medicine>)ViewData["Medicines"];
 }
 
-<h2>Create</h2>
+<h2>Record Medication</h2>
 
 <form asp-action="Create">
     <div class="form-horizontal">
-        <h4>Administration</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
