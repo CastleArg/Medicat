@@ -58,7 +58,7 @@ namespace Medicat.Controllers
          ViewData["Patients"] = _context.Patient.ToList();
 
          ViewData["PatientsList"] = new SelectList(_context.Patient.ToList(), "Id", "Name");
-         ViewData["MedicinesList"] = new SelectList(_context.Medicine.ToList(), "Id", "Name");
+         ViewData["MedicinesList"] = new SelectList(_context.Medicine.ToList(), "Id", "DisplayName");
       }
 
         // POST: Administrations/Create
