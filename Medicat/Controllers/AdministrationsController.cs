@@ -22,8 +22,7 @@ namespace Medicat.Controllers
         // GET: Administrations
         public async Task<IActionResult> Index()
         {
-         PopulateDropdowns();
-            return View(await _context.Administration.ToListAsync());
+            return Json(await _context.Administration.ToListAsync());
         }
 
         // GET: Administrations/Details/5
@@ -41,25 +40,9 @@ namespace Medicat.Controllers
                 return NotFound();
             }
 
-            return View(administration);
+            return Json(administration);
         }
 
-        // GET: Administrations/Create
-        public IActionResult Create()
-        {
-         PopulateDropdowns();
-         
-         return View();
-        }
-
-      private void PopulateDropdowns()
-      {
-         ViewData["Medicines"] =_context.Medicine.ToList();
-         ViewData["Patients"] = _context.Patient.ToList();
-
-         ViewData["PatientsList"] = new SelectList(_context.Patient.ToList(), "Id", "Name");
-         ViewData["MedicinesList"] = new SelectList(_context.Medicine.ToList(), "Id", "DisplayName");
-      }
 
         // POST: Administrations/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -76,24 +59,7 @@ namespace Medicat.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(administration);
-        }
-
-        // GET: Administrations/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-         PopulateDropdowns();
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var administration = await _context.Administration.SingleOrDefaultAsync(m => m.Id == id);
-            if (administration == null)
-            {
-                return NotFound();
-            }
-            return View(administration);
+            return Json(administration);
         }
 
         // POST: Administrations/Edit/5
@@ -128,7 +94,7 @@ namespace Medicat.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            return View(administration);
+            return Json(administration);
         }
 
         // GET: Administrations/Delete/5
@@ -138,7 +104,6 @@ namespace Medicat.Controllers
             {
                 return NotFound();
             }
-         PopulateDropdowns();
         
             var administration = await _context.Administration
                 .SingleOrDefaultAsync(m => m.Id == id);
@@ -147,7 +112,7 @@ namespace Medicat.Controllers
                 return NotFound();
             }
 
-            return View(administration);
+            return Json(administration);
         }
 
         // POST: Administrations/Delete/5
@@ -155,7 +120,6 @@ namespace Medicat.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
       {
-         PopulateDropdowns();
             var administration = await _context.Administration.SingleOrDefaultAsync(m => m.Id == id);
             _context.Administration.Remove(administration);
             await _context.SaveChangesAsync();

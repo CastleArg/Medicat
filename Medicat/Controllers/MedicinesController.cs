@@ -22,7 +22,7 @@ namespace Medicat.Controllers
         // GET: Medicines
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Medicine.ToListAsync());
+            return Json(await _context.Medicine.ToListAsync());
         }
 
         // GET: Medicines/Details/5
@@ -40,14 +40,9 @@ namespace Medicat.Controllers
                 return NotFound();
             }
 
-            return View(medicine);
+            return Json(medicine);
         }
 
-        // GET: Medicines/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
 
         // POST: Medicines/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -62,24 +57,10 @@ namespace Medicat.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(medicine);
+            return Json(medicine);
         }
 
-        // GET: Medicines/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var medicine = await _context.Medicine.SingleOrDefaultAsync(m => m.Id == id);
-            if (medicine == null)
-            {
-                return NotFound();
-            }
-            return View(medicine);
-        }
+    
 
         // POST: Medicines/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
